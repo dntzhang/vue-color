@@ -126,14 +126,14 @@ const presetColors = [
 ]
 
 const historyColors = [
-  '#D0021B',
-  '#F5A623',
-  '#F8E71C',
-  '#8B572A',
-  '#7ED321',
-  '#417505',
-  '#D0021B',
-  '#F5A623'
+  'black',
+  'white'
+  // '#F8E71C',
+  // '#8B572A',
+  // '#7ED321',
+  // '#417505',
+  // '#D0021B',
+  // '#F5A623'
 ]
 
 export default {

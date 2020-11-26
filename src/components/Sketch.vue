@@ -1,56 +1,96 @@
 <template>
-  <div role="application" aria-label="Sketch color picker" :class="['vc-sketch', disableAlpha ? 'vc-sketch__disable-alpha' : '']">
+  <div
+    :class="['vc-sketch', disableAlpha ? 'vc-sketch__disable-alpha' : '']"
+    aria-label="Sketch color picker"
+    role="application"
+  >
     <div class="vc-sketch-saturation-wrap">
-      <saturation v-model="colors" @change="childChange"></saturation>
+      <saturation @change="childChange" v-model="colors"></saturation>
     </div>
     <div class="vc-sketch-controls">
       <div class="vc-sketch-sliders">
         <div class="vc-sketch-hue-wrap">
-          <hue v-model="colors" @change="childChange"></hue>
+          <hue @change="childChange" v-model="colors"></hue>
         </div>
         <div class="vc-sketch-alpha-wrap" v-if="!disableAlpha">
-          <alpha v-model="colors" @change="childChange"></alpha>
+          <alpha @change="childChange" v-model="colors"></alpha>
         </div>
       </div>
       <div class="vc-sketch-color-wrap">
-        <div :aria-label="`Current color is ${activeColor}`" class="vc-sketch-active-color" :style="{background: activeColor}"></div>
+        <div
+          :aria-label="`Current color is ${activeColor}`"
+          :style="{background: activeColor}"
+          class="vc-sketch-active-color"
+        ></div>
         <checkboard></checkboard>
       </div>
     </div>
     <div class="vc-sketch-field" v-if="!disableFields">
       <!-- rgba -->
       <div class="vc-sketch-field--double">
-        <ed-in label="hex" :value="hex" @change="inputChange"></ed-in>
+        <ed-in :value="hex" @change="inputChange" label="hex"></ed-in>
       </div>
       <div class="vc-sketch-field--single">
-        <ed-in label="r" :value="colors.rgba.r" @change="inputChange"></ed-in>
+        <ed-in :value="colors.rgba.r" @change="inputChange" label="r"></ed-in>
       </div>
       <div class="vc-sketch-field--single">
-        <ed-in label="g" :value="colors.rgba.g" @change="inputChange"></ed-in>
+        <ed-in :value="colors.rgba.g" @change="inputChange" label="g"></ed-in>
       </div>
       <div class="vc-sketch-field--single">
-        <ed-in label="b" :value="colors.rgba.b" @change="inputChange"></ed-in>
+        <ed-in :value="colors.rgba.b" @change="inputChange" label="b"></ed-in>
       </div>
       <div class="vc-sketch-field--single" v-if="!disableAlpha">
-        <ed-in label="a" :value="colors.a" :arrow-offset="0.01" :max="1" @change="inputChange"></ed-in>
+        <ed-in :arrow-offset="0.01" :max="1" :value="colors.a" @change="inputChange" label="a"></ed-in>
       </div>
     </div>
-    <div class="vc-sketch-presets" role="group" aria-label="A color preset, pick one to set as current color">
+    <div
+      aria-label="A color preset, pick one to set as current color"
+      class="vc-sketch-presets"
+      role="group"
+    >
       <template v-for="c in presetColors">
         <div
-          v-if="!isTransparent(c)"
-          class="vc-sketch-presets-color"
           :aria-label="'Color:' + c"
           :key="c"
           :style="{background: c}"
-          @click="handlePreset(c)">
-        </div>
-        <div
-          v-else
-          :key="c"
-          :aria-label="'Color:' + c"
+          @click="handlePreset(c)"
           class="vc-sketch-presets-color"
-          @click="handlePreset(c)">
+          v-if="!isTransparent(c)"
+        ></div>
+        <div
+          :aria-label="'Color:' + c"
+          :key="c"
+          @click="handlePreset(c)"
+          class="vc-sketch-presets-color"
+          v-else
+        >
+          <checkboard />
+        </div>
+      </template>
+    </div>
+
+    <div
+      aria-label="A color preset, pick one to set as current color"
+      class="vc-sketch-presets"
+      role="group"
+    >
+      <span class="vc-history-colors-title">历史颜色</span>
+      <template v-for="c in historyColors">
+        <div
+          :aria-label="'Color:' + c"
+          :key="c"
+          :style="{background: c}"
+          @click="handlePreset(c)"
+          class="vc-sketch-presets-color"
+          v-if="!isTransparent(c)"
+        ></div>
+        <div
+          :aria-label="'Color:' + c"
+          :key="c"
+          @click="handlePreset(c)"
+          class="vc-sketch-presets-color"
+          v-else
+        >
           <checkboard />
         </div>
       </template>
@@ -67,10 +107,33 @@ import alpha from './common/Alpha.vue'
 import checkboard from './common/Checkboard.vue'
 
 const presetColors = [
-  '#D0021B', '#F5A623', '#F8E71C', '#8B572A', '#7ED321',
-  '#417505', '#BD10E0', '#9013FE', '#4A90E2', '#50E3C2',
-  '#B8E986', '#000000', '#4A4A4A', '#9B9B9B', '#FFFFFF',
+  '#D0021B',
+  '#F5A623',
+  '#F8E71C',
+  '#8B572A',
+  '#7ED321',
+  '#417505',
+  '#BD10E0',
+  '#9013FE',
+  '#4A90E2',
+  '#50E3C2',
+  '#B8E986',
+  '#000000',
+  '#4A4A4A',
+  '#9B9B9B',
+  '#FFFFFF',
   'rgba(0,0,0,0)'
+]
+
+const historyColors = [
+  '#D0021B',
+  '#F5A623',
+  '#F8E71C',
+  '#8B572A',
+  '#7ED321',
+  '#417505',
+  '#D0021B',
+  '#F5A623'
 ]
 
 export default {
@@ -86,10 +149,17 @@ export default {
   props: {
     presetColors: {
       type: Array,
-      default () {
+      default() {
         return presetColors
       }
     },
+    historyColors: {
+      type: Array,
+      default() {
+        return historyColors
+      }
+    },
+
     disableAlpha: {
       type: Boolean,
       default: false
@@ -100,7 +170,7 @@ export default {
     }
   },
   computed: {
-    hex () {
+    hex() {
       let hex
       if (this.colors.a < 1) {
         hex = this.colors.hex8
@@ -109,30 +179,31 @@ export default {
       }
       return hex.replace('#', '')
     },
-    activeColor () {
+    activeColor() {
       var rgba = this.colors.rgba
       return 'rgba(' + [rgba.r, rgba.g, rgba.b, rgba.a].join(',') + ')'
     }
   },
   methods: {
-    handlePreset (c) {
+    handlePreset(c) {
       this.colorChange({
         hex: c,
         source: 'hex'
       })
     },
-    childChange (data) {
+    childChange(data) {
       this.colorChange(data)
     },
-    inputChange (data) {
+    inputChange(data) {
       if (!data) {
         return
       }
       if (data.hex) {
-        this.isValidHex(data.hex) && this.colorChange({
-          hex: data.hex,
-          source: 'hex'
-        })
+        this.isValidHex(data.hex) &&
+          this.colorChange({
+            hex: data.hex,
+            source: 'hex'
+          })
       } else if (data.r || data.g || data.b || data.a) {
         this.colorChange({
           r: data.r || this.colors.rgba.r,
@@ -155,7 +226,7 @@ export default {
   box-sizing: initial;
   background: #fff;
   border-radius: 4px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 8px 16px rgba(0, 0, 0, .15);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .vc-sketch-saturation-wrap {
@@ -207,7 +278,8 @@ export default {
   right: 0;
   bottom: 0;
   border-radius: 2px;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15), inset 0 0 4px rgba(0, 0, 0, .25);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15),
+    inset 0 0 4px rgba(0, 0, 0, 0.25);
   z-index: 2;
 }
 
@@ -253,6 +325,7 @@ export default {
   padding-left: 10px;
   padding-top: 10px;
   border-top: 1px solid #eee;
+  position: relative;
 }
 
 .vc-sketch-presets-color {
@@ -265,15 +338,24 @@ export default {
   cursor: pointer;
   width: 16px;
   height: 16px;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
 .vc-sketch-presets-color .vc-checkerboard {
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
   border-radius: 3px;
 }
 
 .vc-sketch__disable-alpha .vc-sketch-color-wrap {
   height: 10px;
+}
+
+.vc-history-colors-title {
+  position: absolute;
+  left: 5px;
+  top: -8px;
+  font-size: 5px;
+  padding: 0 5px;
+  background: white;
 }
 </style>

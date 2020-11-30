@@ -10,10 +10,10 @@
     <div class="vc-sketch-controls">
       <div class="vc-sketch-sliders">
         <div class="vc-sketch-hue-wrap">
-          <hue @change="childChange" v-model="colors"></hue>
+          <hue @change="controlChange" v-model="colors"></hue>
         </div>
         <div class="vc-sketch-alpha-wrap" v-if="!disableAlpha">
-          <alpha @change="childChange" v-model="colors"></alpha>
+          <alpha @change="controlChange" v-model="colors"></alpha>
         </div>
       </div>
       <div class="vc-sketch-color-wrap">
@@ -195,6 +195,10 @@ export default {
     childChange(data) {
       this.colorChange(data)
       this.$emit('color-change')
+    },
+    controlChange(data) {
+      this.colorChange(data)
+      this.$emit('control-change')
     },
     inputChange(data) {
       if (!data) {

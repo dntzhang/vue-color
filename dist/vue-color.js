@@ -1889,6 +1889,10 @@ exports.default = {
       this.colorChange(data);
       this.$emit('color-change');
     },
+    controlChange: function controlChange(data) {
+      this.colorChange(data);
+      this.$emit('control-change');
+    },
     inputChange: function inputChange(data) {
       if (!data) {
         return;
@@ -5711,7 +5715,7 @@ var render = function() {
             { staticClass: "vc-sketch-hue-wrap" },
             [
               _c("hue", {
-                on: { change: _vm.childChange },
+                on: { change: _vm.controlChange },
                 model: {
                   value: _vm.colors,
                   callback: function($$v) {
@@ -5730,7 +5734,7 @@ var render = function() {
                 { staticClass: "vc-sketch-alpha-wrap" },
                 [
                   _c("alpha", {
-                    on: { change: _vm.childChange },
+                    on: { change: _vm.controlChange },
                     model: {
                       value: _vm.colors,
                       callback: function($$v) {

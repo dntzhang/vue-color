@@ -1827,6 +1827,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var presetColors = ['#D0021B', '#F5A623', '#F8E71C', '#8B572A', '#7ED321', '#417505', '#BD10E0', '#9013FE', '#4A90E2', '#50E3C2', '#B8E986', '#000000', '#4A4A4A', '#9B9B9B', '#FFFFFF', 'rgba(0,0,0,0)'];
 
+var historyColors = ['black', 'white'];
+
 exports.default = {
   name: 'Sketch',
   mixins: [_color2.default],
@@ -1844,6 +1846,13 @@ exports.default = {
         return presetColors;
       }
     },
+    historyColors: {
+      type: Array,
+      default: function _default() {
+        return historyColors;
+      }
+    },
+
     disableAlpha: {
       type: Boolean,
       default: false
@@ -5652,7 +5661,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.vc-sketch {\n  position: relative;\n  width: 200px;\n  padding: 10px 10px 0;\n  box-sizing: initial;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, .15), 0 8px 16px rgba(0, 0, 0, .15);\n}\n.vc-sketch-saturation-wrap {\n  width: 100%;\n  padding-bottom: 75%;\n  position: relative;\n  overflow: hidden;\n}\n.vc-sketch-controls {\n  display: flex;\n}\n.vc-sketch-sliders {\n  padding: 4px 0;\n  flex: 1;\n}\n.vc-sketch-sliders .vc-hue,\n.vc-sketch-sliders .vc-alpha-gradient {\n  border-radius: 2px;\n}\n.vc-sketch-hue-wrap {\n  position: relative;\n  height: 10px;\n}\n.vc-sketch-alpha-wrap {\n  position: relative;\n  height: 10px;\n  margin-top: 4px;\n  overflow: hidden;\n}\n.vc-sketch-color-wrap {\n  width: 24px;\n  height: 24px;\n  position: relative;\n  margin-top: 4px;\n  margin-left: 4px;\n  border-radius: 3px;\n}\n.vc-sketch-active-color {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  border-radius: 2px;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15), inset 0 0 4px rgba(0, 0, 0, .25);\n  z-index: 2;\n}\n.vc-sketch-color-wrap .vc-checkerboard {\n  background-size: auto;\n}\n.vc-sketch-field {\n  display: flex;\n  padding-top: 4px;\n}\n.vc-sketch-field .vc-input__input {\n  width: 90%;\n  padding: 4px 0 3px 10%;\n  border: none;\n  box-shadow: inset 0 0 0 1px #ccc;\n  font-size: 10px;\n}\n.vc-sketch-field .vc-input__label {\n  display: block;\n  text-align: center;\n  font-size: 11px;\n  color: #222;\n  padding-top: 3px;\n  padding-bottom: 4px;\n  text-transform: capitalize;\n}\n.vc-sketch-field--single {\n  flex: 1;\n  padding-left: 6px;\n}\n.vc-sketch-field--double {\n  flex: 2;\n}\n.vc-sketch-presets {\n  margin-right: -10px;\n  margin-left: -10px;\n  padding-left: 10px;\n  padding-top: 10px;\n  border-top: 1px solid #eee;\n}\n.vc-sketch-presets-color {\n  border-radius: 3px;\n  overflow: hidden;\n  position: relative;\n  display: inline-block;\n  margin: 0 10px 10px 0;\n  vertical-align: top;\n  cursor: pointer;\n  width: 16px;\n  height: 16px;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);\n}\n.vc-sketch-presets-color .vc-checkerboard {\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15);\n  border-radius: 3px;\n}\n.vc-sketch__disable-alpha .vc-sketch-color-wrap {\n  height: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.vc-sketch {\n  position: relative;\n  width: 200px;\n  padding: 10px 10px 0;\n  box-sizing: initial;\n  background: #fff;\n  border-radius: 4px;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 8px 16px rgba(0, 0, 0, 0.15);\n}\n.vc-sketch-saturation-wrap {\n  width: 100%;\n  padding-bottom: 75%;\n  position: relative;\n  overflow: hidden;\n}\n.vc-sketch-controls {\n  display: flex;\n}\n.vc-sketch-sliders {\n  padding: 4px 0;\n  flex: 1;\n}\n.vc-sketch-sliders .vc-hue,\n.vc-sketch-sliders .vc-alpha-gradient {\n  border-radius: 2px;\n}\n.vc-sketch-hue-wrap {\n  position: relative;\n  height: 10px;\n}\n.vc-sketch-alpha-wrap {\n  position: relative;\n  height: 10px;\n  margin-top: 4px;\n  overflow: hidden;\n}\n.vc-sketch-color-wrap {\n  width: 24px;\n  height: 24px;\n  position: relative;\n  margin-top: 4px;\n  margin-left: 4px;\n  border-radius: 3px;\n}\n.vc-sketch-active-color {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  border-radius: 2px;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15),\n    inset 0 0 4px rgba(0, 0, 0, 0.25);\n  z-index: 2;\n}\n.vc-sketch-color-wrap .vc-checkerboard {\n  background-size: auto;\n}\n.vc-sketch-field {\n  display: flex;\n  padding-top: 4px;\n}\n.vc-sketch-field .vc-input__input {\n  width: 90%;\n  padding: 4px 0 3px 10%;\n  border: none;\n  box-shadow: inset 0 0 0 1px #ccc;\n  font-size: 10px;\n}\n.vc-sketch-field .vc-input__label {\n  display: block;\n  text-align: center;\n  font-size: 11px;\n  color: #222;\n  padding-top: 3px;\n  padding-bottom: 4px;\n  text-transform: capitalize;\n}\n.vc-sketch-field--single {\n  flex: 1;\n  padding-left: 6px;\n}\n.vc-sketch-field--double {\n  flex: 2;\n}\n.vc-sketch-presets {\n  margin-right: -10px;\n  margin-left: -10px;\n  padding-left: 10px;\n  padding-top: 10px;\n  border-top: 1px solid #eee;\n  position: relative;\n}\n.vc-sketch-presets-color {\n  border-radius: 3px;\n  overflow: hidden;\n  position: relative;\n  display: inline-block;\n  margin: 0 10px 10px 0;\n  vertical-align: top;\n  cursor: pointer;\n  width: 16px;\n  height: 16px;\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);\n}\n.vc-sketch-presets-color .vc-checkerboard {\n  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);\n  border-radius: 3px;\n}\n.vc-sketch__disable-alpha .vc-sketch-color-wrap {\n  height: 10px;\n}\n.vc-history-colors-title {\n  position: absolute;\n  left: 5px;\n  top: -8px;\n  font-size: 5px;\n  padding: 0 5px;\n  background: white;\n}\n", ""]);
 
 // exports
 
@@ -5670,7 +5679,7 @@ var render = function() {
     "div",
     {
       class: ["vc-sketch", _vm.disableAlpha ? "vc-sketch__disable-alpha" : ""],
-      attrs: { role: "application", "aria-label": "Sketch color picker" }
+      attrs: { "aria-label": "Sketch color picker", role: "application" }
     },
     [
       _c(
@@ -5755,7 +5764,7 @@ var render = function() {
               { staticClass: "vc-sketch-field--double" },
               [
                 _c("ed-in", {
-                  attrs: { label: "hex", value: _vm.hex },
+                  attrs: { value: _vm.hex, label: "hex" },
                   on: { change: _vm.inputChange }
                 })
               ],
@@ -5767,7 +5776,7 @@ var render = function() {
               { staticClass: "vc-sketch-field--single" },
               [
                 _c("ed-in", {
-                  attrs: { label: "r", value: _vm.colors.rgba.r },
+                  attrs: { value: _vm.colors.rgba.r, label: "r" },
                   on: { change: _vm.inputChange }
                 })
               ],
@@ -5779,7 +5788,7 @@ var render = function() {
               { staticClass: "vc-sketch-field--single" },
               [
                 _c("ed-in", {
-                  attrs: { label: "g", value: _vm.colors.rgba.g },
+                  attrs: { value: _vm.colors.rgba.g, label: "g" },
                   on: { change: _vm.inputChange }
                 })
               ],
@@ -5791,7 +5800,7 @@ var render = function() {
               { staticClass: "vc-sketch-field--single" },
               [
                 _c("ed-in", {
-                  attrs: { label: "b", value: _vm.colors.rgba.b },
+                  attrs: { value: _vm.colors.rgba.b, label: "b" },
                   on: { change: _vm.inputChange }
                 })
               ],
@@ -5805,10 +5814,10 @@ var render = function() {
                   [
                     _c("ed-in", {
                       attrs: {
-                        label: "a",
-                        value: _vm.colors.a,
                         "arrow-offset": 0.01,
-                        max: 1
+                        max: 1,
+                        value: _vm.colors.a,
+                        label: "a"
                       },
                       on: { change: _vm.inputChange }
                     })
@@ -5824,12 +5833,61 @@ var render = function() {
         {
           staticClass: "vc-sketch-presets",
           attrs: {
-            role: "group",
-            "aria-label": "A color preset, pick one to set as current color"
+            "aria-label": "A color preset, pick one to set as current color",
+            role: "group"
           }
         },
         [
           _vm._l(_vm.presetColors, function(c) {
+            return [
+              !_vm.isTransparent(c)
+                ? _c("div", {
+                    key: c,
+                    staticClass: "vc-sketch-presets-color",
+                    style: { background: c },
+                    attrs: { "aria-label": "Color:" + c },
+                    on: {
+                      click: function($event) {
+                        _vm.handlePreset(c)
+                      }
+                    }
+                  })
+                : _c(
+                    "div",
+                    {
+                      key: c,
+                      staticClass: "vc-sketch-presets-color",
+                      attrs: { "aria-label": "Color:" + c },
+                      on: {
+                        click: function($event) {
+                          _vm.handlePreset(c)
+                        }
+                      }
+                    },
+                    [_c("checkboard")],
+                    1
+                  )
+            ]
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "vc-sketch-presets",
+          attrs: {
+            "aria-label": "A color preset, pick one to set as current color",
+            role: "group"
+          }
+        },
+        [
+          _c("span", { staticClass: "vc-history-colors-title" }, [
+            _vm._v("历史颜色")
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.historyColors, function(c) {
             return [
               !_vm.isTransparent(c)
                 ? _c("div", {

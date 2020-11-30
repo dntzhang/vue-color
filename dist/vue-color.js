@@ -1883,9 +1883,11 @@ exports.default = {
         hex: c,
         source: 'hex'
       });
+      this.$emit('color-change');
     },
     childChange: function childChange(data) {
       this.colorChange(data);
+      this.$emit('color-change');
     },
     inputChange: function inputChange(data) {
       if (!data) {
@@ -1896,6 +1898,7 @@ exports.default = {
           hex: data.hex,
           source: 'hex'
         });
+        this.$emit('color-change');
       } else if (data.r || data.g || data.b || data.a) {
         this.colorChange({
           r: data.r || this.colors.rgba.r,
@@ -1904,6 +1907,7 @@ exports.default = {
           a: data.a || this.colors.rgba.a,
           source: 'rgba'
         });
+        this.$emit('color-change');
       }
     }
   }

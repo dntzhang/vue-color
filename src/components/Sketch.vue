@@ -190,9 +190,11 @@ export default {
         hex: c,
         source: 'hex'
       })
+      this.$emit('color-change')
     },
     childChange(data) {
       this.colorChange(data)
+      this.$emit('color-change')
     },
     inputChange(data) {
       if (!data) {
@@ -204,6 +206,7 @@ export default {
             hex: data.hex,
             source: 'hex'
           })
+        this.$emit('color-change')
       } else if (data.r || data.g || data.b || data.a) {
         this.colorChange({
           r: data.r || this.colors.rgba.r,
@@ -212,6 +215,7 @@ export default {
           a: data.a || this.colors.rgba.a,
           source: 'rgba'
         })
+        this.$emit('color-change')
       }
     }
   }

@@ -12,7 +12,7 @@
     <div class="demo-container">
       <div class="demo-list">
         <div class="demo-item">
-          <sketch-picker v-model="colors"></sketch-picker>
+          <sketch-picker :historyColors="historyColors" v-model="colors"></sketch-picker>
         </div>
       </div>
     </div>
@@ -51,7 +51,8 @@ export default {
   },
   data() {
     return {
-      colors: defaultProps
+      colors: defaultProps,
+      historyColors: ['red']
     }
   },
   computed: {
@@ -70,7 +71,10 @@ export default {
       this.colors = value
     }
   },
-  created() {}
+  created() {},
+  mounted() {
+    //this.historyColors = ['green']
+  }
 }
 </script>
 
